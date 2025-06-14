@@ -89,6 +89,16 @@
       padding: 15px 0;
     }
     
+    .message-sistem-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 10000000;
+    }
+    
     .message-sistem-boxinfo {
       position: fixed;
       width: 60%;
@@ -101,7 +111,7 @@
       padding: 25px;
       display: flex;
       flex-direction: column;
-      z-index: 10000000;
+      z-index: 10000001;
     }
     
     .message-sistem-boxinfo > h1 {
@@ -184,80 +194,81 @@
 
   const messageSistemInfo = [];
   function showMessageSistemInfo(message) {
+    const elback = document.createElement("div");
     const el = document.createElement("div");
     const h1 = document.createElement("h1");
     const p = document.createElement("p");
     const btnContainer = document.createElement("div");
     const btn = document.createElement("button");
-
+  
+    elback.className = "message-sistem-overlay";
     el.className = "message-sistem-boxinfo";
     h1.textContent = lang.title_info + window.location.hostname;
     p.textContent = message;
     btnContainer.className = "container-button";
     btn.textContent = lang.ok;
-
+  
     btn.onclick = () => {
-      document.body.removeChild(el);
-      const i = messageSistemInfo.indexOf(el);
+      document.body.removeChild(elback);
+      const i = messageSistemInfo.indexOf(elback);
       if (i > -1) messageSistemInfo.splice(i, 1);
     };
-    
+  
     btnContainer.append(btn);
     el.append(h1, p, btnContainer);
-    document.body.appendChild(el);
-    messageSistemInfo.push(el);
+    elback.append(el);
+    document.body.appendChild(elback);
+    messageSistemInfo.push(elback);
   }
 
-  const messageSistemConfirm = [];
-  function showMessageSistemConfirm(url, message) {
-    const el = document.createElement("div");
-    const h1 = document.createElement("h1");
-    const p = document.createElement("p");
-    const btnContainer = document.createElement("div");
-    const btnNo = document.createElement("button");
-    const btnYes = document.createElement("button");
-    
-    if (message === "default") {
-      message = lang.default_confirm;
-    }
-    
-    el.className = "message-sistem-boxinfo";
-    h1.textContent = lang.title_confirm;
-    p.textContent = message;
-    btnContainer.className = "container-button";
-    btnNo.textContent = lang.cancel;
-    btnYes.textContent = lang.continue;
-    
-    btnNo.onclick = () => {
-      document.body.removeChild(el);
-      const i = messageSistemConfirm.indexOf(el);
-      if (i > -1) messageSistemConfirm.splice(i, 1);
-    };
-    
-    btnYes.onclick = () => {
-      sistem.message.log(lang.bye);
-      window.location.href = url;
-      document.body.removeChild(el);
-      const i = messageSistemConfirm.indexOf(el);
-      if (i > -1) messageSistemConfirm.splice(i, 1);
-    };
-    
-    btnContainer.append(btnNo, btnYes);
-    el.append(h1, p, btnContainer);
-    document.body.appendChild(el);
-    messageSistemConfirm.push(el);
+const messageSistemConfirm = [];
+function showMessageSistemConfirm(url, message) {
+  const elback = document.createElement("div");
+  const el = document.createElement("div");
+  const h1 = document.createElement("h1");
+  const p = document.createElement("p");
+  const btnContainer = document.createElement("div");
+  const btnNo = document.createElement("button");
+  const btnYes = document.createElement("button");
+
+  if (message === "default") {
+    message = lang.default_confirm;
   }
-  
-  global.sistem = global.sistem || {};
-  global.sistem.message = {
-    log: showAlert,
-    info: showMessageSistemInfo,
-    confirm: showMessageSistemConfirm
+
+  elback.className = "message-sistem-overlay";
+  el.className = "message-sistem-boxinfo";
+  h1.textContent = lang.title_confirm;
+  p.textContent = message;
+  btnContainer.className = "container-button";
+  btnNo.textContent = lang.cancel;
+  btnYes.textContent = lang.continue;
+
+  btnNo.onclick = () => {
+    document.body.removeChild(elback);
+    const i = messageSistemConfirm.indexOf(elback);
+    if (i > -1) messageSistemConfirm.splice(i, 1);
   };
-  
+
+  btnYes.onclick = () => {
+    sistem.message.log(lang.bye);
+    window.location.href = url;
+    document.body.removeChild(elback);
+    const i = messageSistemConfirm.indexOf(elback);
+    if (i > -1) messageSistemConfirm.splice(i, 1);
+  };
+
+  btnContainer.append(btnNo, btnYes);
+  el.append(h1, p, btnContainer);
+  elback.append(el);
+  document.body.appendChild(elback);
+  messageSistemConfirm.push(elback);
+}
+
+
 const messageSistemPrompt = [];
 function showMessageSistemPrompt(message, typeForm) {
   return new Promise((resolve, reject) => {
+    const elback = document.createElement("div");
     const el = document.createElement("div");
     const h1 = document.createElement("h1");
     const p = document.createElement("p");
@@ -266,57 +277,47 @@ function showMessageSistemPrompt(message, typeForm) {
     const btnNo = document.createElement("button");
     const btnYes = document.createElement("button");
 
+    elback.className = "message-sistem-overlay";
     el.className = "message-sistem-boxinfo";
     h1.textContent = lang.prompt_title;
     p.textContent = message;
-    if (typeForm === "" && null) {
+
+    if (!typeForm || typeForm === "") {
       typeForm = "text";
-    } else if (typeForm === "num") {
-      typeForm = "number";
-    } else if (typeForm === "email") {
-      typeForm = "email";
-    } else if (typeForm === "url") {
-      typeForm = "url";
-    } else if (typeForm === "date") {
-      typeForm = "date";
-    } else if (typeForm === "time") {
-      typeForm = "time";
-    } else if (typeForm === "tel") {
-      typeForm = "tel";
-    } else if (typeForm === "range") {
-      typeForm = "range";
+    } else if (["num", "email", "url", "date", "time", "tel", "range"].includes(typeForm)) {
+      typeForm = typeForm === "num" ? "number" : typeForm;
     } else {
       typeForm = "hidden";
-      sistem.message.log("hello", "er");
-      
+      sistem.message.log("Error: Value tidak valid", "er");
     }
+
     form.type = typeForm;
     btnContainer.className = "container-button";
     btnNo.textContent = lang.cancel;
     btnYes.textContent = lang.send;
 
     btnNo.onclick = () => {
-      document.body.removeChild(el);
-      const i = messageSistemPrompt.indexOf(el);
+      document.body.removeChild(elback);
+      const i = messageSistemPrompt.indexOf(elback);
       if (i > -1) messageSistemPrompt.splice(i, 1);
       reject("Dibatalkan");
     };
 
     btnYes.onclick = () => {
       const value = form.value;
-      document.body.removeChild(el);
-      const i = messageSistemPrompt.indexOf(el);
+      document.body.removeChild(elback);
+      const i = messageSistemPrompt.indexOf(elback);
       if (i > -1) messageSistemPrompt.splice(i, 1);
       resolve(value);
     };
 
     btnContainer.append(btnNo, btnYes);
     el.append(h1, p, form, btnContainer);
-    document.body.appendChild(el);
-    messageSistemPrompt.push(el);
+    elback.append(el);
+    document.body.appendChild(elback);
+    messageSistemPrompt.push(elback);
   });
 }
-  
 
 global.sistem = global.sistem || {};
 global.sistem.message = {
