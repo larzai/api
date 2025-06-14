@@ -33,6 +33,10 @@
   
   const style = document.createElement("style");
   style.innerHTML = `
+    body.no-scroll {
+      overflow: hidden;
+    }
+    
     .message-log-alert {
       position: fixed;
       bottom: 20px;
@@ -90,13 +94,14 @@
     }
     
     .message-sistem-overlay {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       background: rgba(0, 0, 0, 0.45);
       z-index: 10000000;
+      overflow: hidden;
     }
     
     .message-sistem-boxinfo {
@@ -112,6 +117,7 @@
       display: flex;
       flex-direction: column;
       z-index: 10000001;
+      overflow: auto;
     }
     
     .message-sistem-boxinfo > h1 {
@@ -207,9 +213,11 @@
     p.textContent = message;
     btnContainer.className = "container-button";
     btn.textContent = lang.ok;
+    document.body.classList.add('no-scroll');
   
     btn.onclick = () => {
       document.body.removeChild(elback);
+      document.body.classList.remove('no-scroll');
       const i = messageSistemInfo.indexOf(elback);
       if (i > -1) messageSistemInfo.splice(i, 1);
     };
@@ -222,7 +230,7 @@
   }
 
 const messageSistemConfirm = [];
-function showMessageSistemConfirm(url, message) {
+function showMessageSistemConfirm(message, url) {
   const elback = document.createElement("div");
   const el = document.createElement("div");
   const h1 = document.createElement("h1");
@@ -242,9 +250,11 @@ function showMessageSistemConfirm(url, message) {
   btnContainer.className = "container-button";
   btnNo.textContent = lang.cancel;
   btnYes.textContent = lang.continue;
+  document.body.classList.add('no-scroll');
 
   btnNo.onclick = () => {
     document.body.removeChild(elback);
+    document.body.classList.remove('no-scroll');
     const i = messageSistemConfirm.indexOf(elback);
     if (i > -1) messageSistemConfirm.splice(i, 1);
   };
@@ -253,6 +263,7 @@ function showMessageSistemConfirm(url, message) {
     sistem.message.log(lang.bye);
     window.location.href = url;
     document.body.removeChild(elback);
+    document.body.classList.remove('no-scroll');
     const i = messageSistemConfirm.indexOf(elback);
     if (i > -1) messageSistemConfirm.splice(i, 1);
   };
@@ -281,6 +292,7 @@ function showMessageSistemPrompt(message, typeForm) {
     el.className = "message-sistem-boxinfo";
     h1.textContent = lang.prompt_title;
     p.textContent = message;
+    document.body.classList.add('no-scroll');
 
     if (!typeForm || typeForm === "") {
       typeForm = "text";
@@ -298,6 +310,7 @@ function showMessageSistemPrompt(message, typeForm) {
 
     btnNo.onclick = () => {
       document.body.removeChild(elback);
+      document.body.classList.remove('no-scroll');
       const i = messageSistemPrompt.indexOf(elback);
       if (i > -1) messageSistemPrompt.splice(i, 1);
       reject("Dibatalkan");
@@ -306,6 +319,7 @@ function showMessageSistemPrompt(message, typeForm) {
     btnYes.onclick = () => {
       const value = form.value;
       document.body.removeChild(elback);
+      document.body.classList.remove('no-scroll');
       const i = messageSistemPrompt.indexOf(elback);
       if (i > -1) messageSistemPrompt.splice(i, 1);
       resolve(value);
