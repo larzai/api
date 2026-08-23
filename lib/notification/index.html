@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lyraxis Test</title>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all" />
 </head>
 
-<body>
+<body class="lynDar">
 
   <div class="buttons">
     <button onclick="tes()">Log</button>
@@ -14,6 +15,7 @@
     <button onclick="tes3()">Confirm</button>
     <button onclick="tes4()">Prompt</button>
     <button onclick="tes5()">Toast</button>
+    <button onclick="tes6()">Generate QR</button>
   </div>
 
   <script src="./script.js"></script>
@@ -85,6 +87,14 @@
         Mess: "Koneksi terputus.",
         Status: "error",
         Permanent: true
+      });
+    }
+    
+    function tes6() {
+      lyn.qrcode({
+        Title: "Hai",
+        Mess: "Haiiiii",
+        Link: "https://rifaldo.my.id"
       });
     }
   </script>
