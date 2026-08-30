@@ -1,0 +1,12 @@
+{
+  "name": "lyraxis-notification",
+  "version": "1.0.2",
+  "main": "script.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lyraxis - Rifaldo Saputra",
+  "license": "MIT",
+  "description": ""
+}
