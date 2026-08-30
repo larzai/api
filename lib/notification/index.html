@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lyraxis — Documentation</title>
+  <title>Lycaxia — Documentation</title>
   <link rel="icon" href="assets/main.png" type="image/png">
   <style>
     :root {
@@ -572,8 +572,8 @@
 <body>
 
   <header class="topbar">
-    <a class="brand" href="https://www.lyraxis.my.id" target="_blank" rel="noopener noreferrer">
-      <img src="assets/main.png" alt="Lyraxis Logo">
+    <a class="brand" href="https://www.lycaxia.com/" target="_blank" rel="noopener noreferrer">
+      <img src="assets/main.png" alt="Lycaxia Logo">
     </a>
 
     <div class="top-actions">
@@ -621,14 +621,14 @@
       <section class="hero" id="introduction">
         <div>
           <div class="eyebrow">JAVASCRIPT NOTIFICATION LIBRARY</div>
-          <h1>Lyraxis</h1>
+          <h1>Lycaxia</h1>
           <p>
             A lightweight notification system for JavaScript featuring Log, Info, Confirm, Prompt, Toast, Dynamic Island, multi-language support, and sound effects.
           </p>
 
           <div class="hero-buttons">
             <a href="#installation" class="primary-btn">Get Started</a>
-            <a href="https://www.lyraxis.my.id" target="_blank" rel="noopener noreferrer" class="secondary-btn">Website</a>
+            <a href="https://www.lycaxia.com/" target="_blank" rel="noopener noreferrer" class="secondary-btn">Website</a>
           </div>
         </div>
       </section>
@@ -636,7 +636,7 @@
       <section id="installation">
         <div class="section-label">GETTING STARTED</div>
         <code>Installation</code>
-        <p>Lyraxis can be integrated directly via Vanilla JavaScript or installed in React projects.</p>
+        <p>Lycaxia can be integrated directly via Vanilla JavaScript or installed in React projects.</p>
 
         <h3>Vanilla JavaScript</h3>
         <p>Simply include the script tag at the bottom of your HTML <code>&lt;body&gt;</code> (styles are automatically injected).</p>
@@ -648,7 +648,7 @@
               <button onclick="copyCode('install-vanilla')">Copy</button>
             </div>
           </div>
-          <pre><code id="install-vanilla">&lt;script src="https://lib.lyraxis.my.id/notification/script.js"&gt;&lt;/script&gt;</code></pre>
+          <pre><code id="install-vanilla">&lt;script src="https://lib.lycaxia.com/notification/script.js"&gt;&lt;/script&gt;</code></pre>
         </div>
 
         <h3>npm</h3>
@@ -661,14 +661,14 @@
               <button onclick="copyCode('install-npm')">Copy</button>
             </div>
           </div>
-          <pre><code id="install-npm">npm install lyraxis-notification</code></pre>
+          <pre><code id="install-npm">npm install lycaxia-notification</code></pre>
         </div>
       </section>
 
       <section id="vanilla">
         <div class="section-label">VANILLA JAVASCRIPT</div>
         <h2>Vanilla Setup</h2>
-        <p>In Vanilla JavaScript environments, Lyraxis auto-injects its styling and exposes the global <code>lyn</code> object.</p>
+        <p>In Vanilla JavaScript environments, Lycaxia auto-injects its styling and exposes the global <code>lyn</code> object.</p>
 
         <div class="code-box" data-code-id="vanilla-setup">
           <div class="code-head">
@@ -682,20 +682,20 @@
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
-  &lt;title&gt;Lyraxis Example&lt;/title&gt;
+  &lt;title&gt;Lycaxia Example&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
   &lt;button onclick="showNotification()"&gt;Show Notification&lt;/button&gt;
 
-  &lt;script src="https://lib.lyraxis.my.id/notification/script.js"&gt;&lt;/script&gt;
+  &lt;script src="https://lib.lycaxia.com/notification/script.js"&gt;&lt;/script&gt;
   &lt;script&gt;
     lyn.soundNotification("allow");
 
     function showNotification() {
       lyn.toast({
         Title: "Hello!",
-        Mess: "Lyraxis loaded successfully.",
+        Mess: "Lycaxia loaded successfully.",
         Status: "success"
       });
     }
@@ -750,7 +750,7 @@
               <button onclick="copyCode('react-setup')">Copy</button>
             </div>
           </div>
-          <pre><code id="react-setup">import lyn from "lyraxis-notification";
+          <pre><code id="react-setup">import lyn from "lycaxia-notification";
 
 function App() {
   function showNotification() {
@@ -912,7 +912,7 @@ lyn.log({
             </div>
           </div>
           <pre><code id="info-example">lyn.info({
-  Subtitle: "Lyraxis Demo",
+  Subtitle: "Lycaxia Demo",
   Title: "Information",
   Mess: "This is an informational dialog from lyn.info.\nSecond line text is also supported."
 });</code></pre>
@@ -1387,7 +1387,7 @@ lyn.toast({
       <section>
         <div class="section-label">COMPLETE EXAMPLE</div>
         <h2>Example Project</h2>
-        <p>A full integration example demonstrating multiple Lyraxis notification types together.</p>
+        <p>A full integration example demonstrating multiple Lycaxia notification types together.</p>
 
         <div class="code-box" data-code-id="complete-example">
           <div class="code-head">
@@ -1401,15 +1401,15 @@ lyn.toast({
 &lt;button onclick="showConfirm()"&gt;Confirm&lt;/button&gt;
 &lt;button onclick="showDynamic()"&gt;Dynamic Island&lt;/button&gt;
 
-&lt;script src="https://lib.lyraxis.my.id/notification/script.js"&gt;&lt;/script&gt;
+&lt;script src="https://lib.lycaxia.com/notification/script.js"&gt;&lt;/script&gt;
 
 &lt;script&gt;
   lyn.soundNotification("allow");
 
   function showToast() {
     lyn.toast({
-      Title: "Lyraxis",
-      Mess: "Hello from Lyraxis!",
+      Title: "Lycaxia",
+      Mess: "Hello from Lycaxia!",
       Status: "success"
     });
   }
@@ -1440,12 +1440,12 @@ lyn.toast({
 
       <section class="footer-note">
         <div class="footer-brand">
-          <img src="assets/main.png" alt="Lyraxis Logo">
-          <strong>Lyraxis</strong>
+          <img src="assets/main.png" alt="Lycaxia Logo">
+          <strong>Lycaxia</strong>
         </div>
         <p>Lightweight notification system for modern web projects.</p>
-        <a href="https://www.lyraxis.my.id" target="_blank" rel="noopener noreferrer">www.lyraxis.my.id</a>
-        <div class="copyright">© Lyraxis 2026.</div>
+        <a href="https://www.lycaxia.com/" target="_blank" rel="noopener noreferrer">www.lycaxia.com</a>
+        <div class="copyright">© Lycaxia 2026.</div>
       </section>
 
     </main>
@@ -1455,7 +1455,7 @@ lyn.toast({
   <script src="./script.js"></script>
 
   <script>
-    const CDN_SCRIPT = "https://lib.lyraxis.my.id/notification/script.js";
+    const CDN_SCRIPT = "https://lib.lycaxia.com/notification/script.js";
 
     function getCode(id) {
       const element = document.getElementById(id);
@@ -1510,7 +1510,7 @@ lyn.toast({
           if (typeof lyn !== "undefined") {
             new Function(cleanCode)();
           } else {
-            alert("Lyraxis script is not ready yet!");
+            alert("Lycaxia script is not ready yet!");
           }
           return;
         }
@@ -1522,7 +1522,7 @@ lyn.toast({
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lyraxis Test Run</title>
+  <title>Lycaxia Test Run</title>
   <style>
     body {
       background: #0c0d0f;
