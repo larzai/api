@@ -4,174 +4,319 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lyraxis Test</title>
-  <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
-<body class="lynDar">
+<body>
 
   <div class="buttons">
+
     <button onclick="tes()">Log</button>
     <button onclick="tes2()">Info</button>
     <button onclick="tes3()">Confirm</button>
     <button onclick="tes4()">Prompt</button>
     <button onclick="tes5()">Toast</button>
+
     <button onclick="tes7()">Dynamic Island</button>
+    <button onclick="tes8()">Dynamic Custom</button>
+
+    <button onclick="tes9()">Bahasa Indonesia</button>
+    <button onclick="tes10()">English</button>
+
+    <button onclick="tes11()">Sound ON</button>
+    <button onclick="tes12()">Sound OFF</button>
+
+    <button onclick="tes13()">Dynamic Semua Status</button>
+    <button onclick="tes14()">Dynamic Semua Icon</button>
+
   </div>
+
 
   <script src="./script.js"></script>
 
   <script>
-    
+
     lyn.soundNotification("allow");
+
 
     function tes() {
       lyn.log({
-        Status: "err",
-        Mess: "Berhasil mengirim riquest mohon tunggu sebentar."
+        Mess: "Berhasil mengirim request, mohon tunggu sebentar."
+      });
+
+      lyn.log({
+        Status: "error",
+        Mess: "Gagal menghubungkan ke server."
       });
     }
 
+
     function tes2() {
       lyn.info({
-        Mess: "Teks",
-        title: "Coba"
+        Subtitle: "Lyraxis Test",
+        Title: "Informasi",
+        Mess: "Ini adalah informasi dari lyn.info.\nBaris kedua juga ikut dites."
       });
     }
+
 
     function tes3() {
       lyn.confirm({
         Mess: "Yakin ingin melanjutkan?",
         Event: function() {
-          lyn.info({
-            Mess: "Telah diklik"
+          lyn.log({
+            Status: "success",
+            Mess: "Kamu menekan tombol Lanjutkan."
           });
         }
       });
     }
 
+
     async function tes4() {
       try {
-        const a = await lyn.prompt({
+
+        const angka = await lyn.prompt({
           Mess: "Masukkan nomor:",
           Type: "num"
         });
 
         lyn.log({
-          Mess: a >= 50
-            ? "Nilai lebih dari 50."
-            : "Nilai untuk Pak Prabowo: 11/100."
+          Status: "success",
+          Mess: "Kamu memasukkan: " + angka
         });
+
       } catch (err) {
+
         lyn.log({
-          Mess: "User membatalkan prompt",
-          Status: "er"
+          Status: "error",
+          Mess: "User membatalkan prompt."
         });
+
       }
     }
-    
+
+
     function tes5() {
+
       lyn.toast({
-        Title: "Pemberitahuan",
-        Mess: "Ini toast biasa, hilang 5 detik",
+        Title: "Informasi",
+        Mess: "Ini toast default.",
         Status: "default"
       });
-      
+
       lyn.toast({
-        Title: "Berhasil!",
-        Mess: "Data berhasil disimpan ke database.",
+        Title: "Berhasil",
+        Mess: "Data berhasil disimpan.",
         Status: "success"
       });
-      
+
       lyn.toast({
-        Title: "Gagal Menyimpan",
-        Mess: "Koneksi terputus.",
-        Status: "error",
+        Title: "Gagal",
+        Mess: "Terjadi kesalahan pada server.",
+        Status: "error"
+      });
+
+      lyn.toast({
+        Title: "Permanen",
+        Mess: "Toast ini tidak hilang otomatis.",
+        Status: "default",
         Permanent: true
       });
+
     }
-    
+
+
     function tes7() {
-  // Default
-  lyn.dynamicIsland({
-    Status: "default",
-    Mess: "File pertama selesai",
-    Label: "info"
-  });
 
-  // Success
-  lyn.dynamicIsland({
-    Status: "success",
-    Mess: "File berhasil disimpan",
-    Label: "download"
-  });
+      lyn.dynamicIsland({
+        Status: "default",
+        Mess: "Pesan informasi biasa",
+        Label: "info"
+      });
 
-  // Warning
-  lyn.dynamicIsland({
-    Status: "warning",
-    Mess: "Koneksi agak lambat",
-    Label: "warning"
-  });
+      lyn.dynamicIsland({
+        Status: "success",
+        Mess: "File berhasil disimpan",
+        Label: "download"
+      });
 
-  // Failed / Error
-  lyn.dynamicIsland({
-    Status: "failed",
-    Mess: "Gagal menghubungkan server",
-    Label: "error"
-  });
+      lyn.dynamicIsland({
+        Status: "warning",
+        Mess: "Koneksi agak lambat",
+        Label: "warning"
+      });
 
-  // Active
-  lyn.dynamicIsland({
-    Status: "active",
-    Mess: "Memutar musik",
-    Label: "music"
-  });
+      lyn.dynamicIsland({
+        Status: "failed",
+        Mess: "Gagal menghubungkan server",
+        Label: "failed"
+      });
 
-  // Wait
-  lyn.dynamicIsland({
-    Status: "active",
-    Mess: "Sedang memproses...",
-    Label: "wait"
-  });
+      lyn.dynamicIsland({
+        Status: "active",
+        Mess: "Sedang memutar musik",
+        Label: "music"
+      });
 
-  // Notification
-  lyn.dynamicIsland({
-    Status: "default",
-    Mess: "Ada notifikasi baru",
-    Label: "notification"
-  });
+      lyn.dynamicIsland({
+        Status: "waiting",
+        Mess: "Sedang menunggu proses",
+        Label: "wait"
+      });
 
-  // Custom icon
-  lyn.dynamicIsland({
-    Status: "active",
-    Mess: "Custom icon berhasil",
-    Label: "custom",
-    Icon: `
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2 14.8 8.2 21 11l-6.2 2.8L12 20l-2.8-6.2L3 11l6.2-2.8L12 2Z"/>
-      </svg>
-    `
-  });
+      lyn.dynamicIsland({
+        Status: "default",
+        Mess: "Ada notifikasi baru",
+        Label: "notification"
+      });
 
-  // Custom icon + custom animation
-  lyn.dynamicIsland({
-    Status: "warning",
-    Mess: "Custom animation",
-    Label: "custom",
-    Icon: `
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2 2 22h20L12 2Zm0 6 5 10H7l5-10Zm-1 3v4h2v-4h-2Zm0 5v2h2v-2h-2Z"/>
-      </svg>
-    `,
-    Animation: "shake"
-  });
     }
 
 
+    function tes8() {
 
-    
+      lyn.dynamicIsland({
+        Label: "custom",
+        Mess: "Ini Dynamic Island custom!",
+        CustomIcon: `
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2 14.5 9.5 22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/>
+          </svg>
+        `,
+        CustomColor: "#a855f7",
+        CustomAnimation: "lyCustomPulse 1s ease-in-out infinite"
+      });
+
+    }
+
+
+    function tes9() {
+      lyn.setLang("id");
+
+      lyn.info({
+        Mess: "Bahasa sekarang menggunakan Indonesia."
+      });
+    }
+
+
+    function tes10() {
+      lyn.setLang("en");
+
+      lyn.info({
+        Mess: "The language is now English."
+      });
+    }
+
+
+    function tes11() {
+
+      lyn.soundNotification("allow");
+
+      lyn.toast({
+        Title: "Sound ON",
+        Mess: "Suara notifikasi diaktifkan.",
+        Status: "success"
+      });
+
+    }
+
+
+    function tes12() {
+
+      lyn.soundNotification("off");
+
+      lyn.toast({
+        Title: "Sound OFF",
+        Mess: "Suara notifikasi dimatikan.",
+        Status: "default"
+      });
+
+    }
+
+
+    function tes13() {
+
+      const data = [
+
+        {
+          Status: "default",
+          Label: "info",
+          Mess: "Status default"
+        },
+
+        {
+          Status: "active",
+          Label: "info",
+          Mess: "Status active"
+        },
+
+        {
+          Status: "success",
+          Label: "success",
+          Mess: "Status success"
+        },
+
+        {
+          Status: "warning",
+          Label: "warning",
+          Mess: "Status warning"
+        },
+
+        {
+          Status: "failed",
+          Label: "failed",
+          Mess: "Status failed"
+        },
+
+        {
+          Status: "waiting",
+          Label: "wait",
+          Mess: "Status waiting"
+        }
+
+      ];
+
+      data.forEach(item => {
+        lyn.dynamicIsland(item);
+      });
+
+    }
+
+
+    function tes14() {
+
+      const icons = [
+        "home",
+        "notification",
+        "music",
+        "info",
+        "download",
+        "upload",
+        "settings",
+        "success",
+        "failed",
+        "warning",
+        "wait"
+      ];
+
+      icons.forEach(icon => {
+
+        lyn.dynamicIsland({
+          Status: "default",
+          Label: icon,
+          Mess: "Icon: " + icon
+        });
+
+      });
+
+    }
+
   </script>
 
+
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -210,6 +355,23 @@
     button:active {
       transform: scale(.97);
     }
+
+    @keyframes lyCustomPulse {
+
+      0% {
+        transform: scale(1) rotate(0);
+      }
+
+      50% {
+        transform: scale(1.25) rotate(180deg);
+      }
+
+      100% {
+        transform: scale(1) rotate(360deg);
+      }
+
+    }
+
   </style>
 
 </body>
