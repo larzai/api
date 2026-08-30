@@ -1,34 +1,1573 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#627254" />
-  <meta name="keywords" content="Belum tau, Mimin belum tau, Halaman utama, Belum tau utama, Belum tau my id" />
-  <meta name="description" content="Fakta unik dan ilmu baru yang jarang diketahui banyak orang, disajikan dari sumber terpercaya untuk menambah wawasanmu." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyraxis — Documentation</title>
+  <link rel="icon" href="assets/main.png" type="image/png">
+  <style>
+    :root {
+      --primary: #d0e505;
+      --primary-soft: rgba(208, 229, 5, .10);
+      --primary-border: rgba(208, 229, 5, .28);
+      --bg: #0c0d0f;
+      --surface: #111317;
+      --surface-2: #17191e;
+      --surface-3: #1d2026;
+      --border: #292d35;
+      --text: #f2f3f5;
+      --muted: #9b9fa8;
+      --muted-2: #6e737d;
+      --success: #22c55e;
+      --warning: #eab308;
+      --danger: #ef4444;
+      --active: #3b82f6;
+      --radius: 14px;
+    }
 
-  <meta property="og:title" content="Belum tau - Gali Ilmu–mu disini!" />
-  <meta property="og:description" content="Ga paham? Yuk sini mimin Belum tau." />
-  <meta property="og:image" content="https://belumtau.com/upload/image/preview-image.png" />
-  <meta property="og:url" content="https://belumtau.com" />
-  <meta property="og:type" content="website" />
+    * {
+      box-sizing: border-box;
+    }
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Belum tau - Home" />
-  <meta name="twitter:description" content="Ga paham? Yuk sini mimin Belum tau." />
-  <meta name="twitter:image" content="https://belumtau.com/upload/image/preview-image.png" />
-  <meta name="twitter:url" content="https://belumtau.com" />
-  <meta name="twitter:site" content="@KeztOfficial" />
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
 
-  <link rel="shortcut icon" href="https://belumtau.com/upload/image/main.png" type="image/x-icon" />
-  <link rel="stylesheet" href="../styles.css" type="text/css" />
-  <title>Lyraxis | Library Notification</title>
-  
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(12, 13, 15, .92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      z-index: 1000;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      transition: .2s;
+    }
+
+    .brand:hover {
+      opacity: 0.8;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .top-actions a {
+      transition: .2s;
+    }
+
+    .top-actions a:hover {
+      color: var(--primary);
+    }
+
+    .layout {
+      display: flex;
+      max-width: 1440px;
+      margin: auto;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 64px;
+      width: 240px;
+      height: calc(100vh - 64px);
+      padding: 30px 20px;
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .side-title {
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .sidebar > a {
+      display: block;
+      padding: 6px 10px;
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      transition: .18s;
+    }
+
+    .sidebar > a:hover {
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .side-group {
+      margin-top: 24px;
+      margin-bottom: 6px;
+      padding-left: 10px;
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .content {
+      width: 100%;
+      min-width: 0;
+      padding: 55px 70px 80px;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto 95px;
+    }
+
+    .hero {
+      max-width: 1000px;
+      padding: 45px 0 65px;
+    }
+
+    .eyebrow,
+    .section-label {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .hero h1 {
+      margin: 4px 0 10px;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1;
+      letter-spacing: -3px;
+    }
+
+    .hero p {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 10px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .primary-btn {
+      background: var(--primary);
+      color: #111;
+    }
+
+    .primary-btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .secondary-btn:hover {
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    h2 {
+      margin: 4px 0 14px;
+      font-size: 31px;
+      line-height: 1.2;
+      letter-spacing: -.8px;
+    }
+
+    h3 {
+      margin: 32px 0 12px;
+      font-size: 17px;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    p code,
+    li code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: var(--surface-3);
+      color: var(--primary);
+      font-size: .9em;
+    }
+
+    .signature {
+      display: inline-block;
+      margin: 12px 0 15px;
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    .code-box {
+      margin: 20px 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #0a0b0d;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .18);
+    }
+
+    .code-head {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 13px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .code-head > span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .code-head div {
+      display: flex;
+      gap: 6px;
+    }
+
+    .code-head button {
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface-3);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .18s;
+    }
+
+    .code-head button:hover {
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    pre {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.75;
+      tab-size: 2;
+    }
+
+    pre code {
+      color: #d8dbe1;
+      white-space: pre;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .quick-card {
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--surface);
+      transition: .2s;
+    }
+
+    .quick-card:hover {
+      border-color: var(--primary-border);
+      transform: translateY(-2px);
+    }
+
+    .quick-card strong {
+      display: block;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    .quick-card span {
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .api-table {
+      margin-top: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .api-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+    }
+
+    .api-row:last-child {
+      border-bottom: 0;
+    }
+
+    .api-row code {
+      color: var(--primary);
+    }
+
+    .api-row span {
+      color: var(--muted);
+    }
+
+    .api-header {
+      background: var(--surface-3);
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      overflow: hidden;
+      margin: 15px 0 25px;
+    }
+
+    .option-list > div {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 20px;
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+    }
+
+    .option-list > div:last-child {
+      border-bottom: 0;
+    }
+
+    .option-list code {
+      color: var(--primary);
+    }
+
+    .option-list span {
+      color: var(--muted);
+    }
+
+    .badge-opt {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--surface-3);
+      color: var(--muted-2);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .tag-list,
+    .icon-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 15px 0;
+    }
+
+    .tag-list code,
+    .icon-list code {
+      padding: 6px 9px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin: 20px 0;
+    }
+
+    .status-card {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .status-card strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .status-card span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .status-card.default strong { color: var(--primary); }
+    .status-card.active strong { color: var(--active); }
+    .status-card.success strong { color: var(--success); }
+    .status-card.warning strong { color: var(--warning); }
+    .status-card.failed strong { color: var(--danger); }
+    .status-card.waiting strong { color: #9ca3af; }
+
+    .translation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .translation-grid > div {
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .translation-grid code {
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .translation-grid span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-note {
+      padding-top: 25px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .footer-brand img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .footer-note p {
+      margin: 5px 0;
+      font-size: 12px;
+    }
+
+    .footer-note > a {
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    @keyframes lyCustomPulse {
+      0% { transform: scale(1) rotate(0); }
+      50% { transform: scale(1.25) rotate(180deg); }
+      100% { transform: scale(1) rotate(360deg); }
+    }
+
+    @media (max-width: 900px) {
+      .top-actions { display: none; }
+      .sidebar { display: none; }
+      .content { padding: 35px 22px 60px; }
+      .hero { grid-template-columns: 1fr; gap: 20px; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .status-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .topbar { padding: 0 17px; }
+      .content { padding: 28px 15px 50px; }
+      section { margin-bottom: 70px; }
+      .hero { padding-top: 25px; }
+      .hero h1 { letter-spacing: -2px; }
+      .quick-grid, .status-grid, .translation-grid { grid-template-columns: 1fr; }
+      .api-row { grid-template-columns: 1fr; gap: 3px; }
+      .option-list > div { grid-template-columns: 1fr; gap: 3px; }
+      pre { padding: 15px; font-size: 12px; }
+    }
+  </style>
 </head>
 <body>
-  <script src="../main.js"></script>
 
-  
+  <header class="topbar">
+    <a class="brand" href="https://www.lyraxis.my.id" target="_blank" rel="noopener noreferrer">
+      <img src="assets/main.png" alt="Lyraxis Logo">
+    </a>
+
+    <div class="top-actions">
+      <a href="#installation">Documentation</a>
+      <a href="#vanilla">Vanilla</a>
+      <a href="#react">React</a>
+      <a href="#api">API</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-title">Documentation</div>
+      <a href="#introduction">Introduction</a>
+      <a href="#installation">Installation</a>
+
+      <div class="side-group">Vanilla</div>
+      <a href="#vanilla">Setup</a>
+      <a href="#vanilla-usage">Usage</a>
+
+      <div class="side-group">React</div>
+      <a href="#react">Setup</a>
+      <a href="#react-usage">Usage</a>
+
+      <div class="side-group">API</div>
+      <a href="#api">Overview</a>
+      <a href="#log">lyn.log()</a>
+      <a href="#info">lyn.info()</a>
+      <a href="#confirm">lyn.confirm()</a>
+      <a href="#prompt">lyn.prompt()</a>
+      <a href="#toast">lyn.toast()</a>
+      <a href="#dynamic">lyn.dynamicIsland()</a>
+      <a href="#language">lyn.setLang()</a>
+      <a href="#sound">lyn.soundNotification()</a>
+
+      <div class="side-group">Dynamic Island</div>
+      <a href="#dynamic-status">Status</a>
+      <a href="#dynamic-icons">Icons</a>
+      <a href="#dynamic-custom">Custom</a>
+      <a href="#dynamic-animation">Animation</a>
+    </aside>
+
+    <main class="content">
+
+      <section class="hero" id="introduction">
+        <div>
+          <div class="eyebrow">JAVASCRIPT NOTIFICATION LIBRARY</div>
+          <h1>Lyraxis</h1>
+          <p>
+            A lightweight notification system for JavaScript featuring Log, Info, Confirm, Prompt, Toast, Dynamic Island, multi-language support, and sound effects.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#installation" class="primary-btn">Get Started</a>
+            <a href="https://www.lyraxis.my.id" target="_blank" rel="noopener noreferrer" class="secondary-btn">Website</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="installation">
+        <div class="section-label">GETTING STARTED</div>
+        <code>Installation</code>
+        <p>Lyraxis can be integrated directly via Vanilla JavaScript or installed in React projects.</p>
+
+        <h3>Vanilla JavaScript</h3>
+        <p>Simply include the script tag at the bottom of your HTML <code>&lt;body&gt;</code> (styles are automatically injected).</p>
+
+        <div class="code-box" data-code-id="install-vanilla">
+          <div class="code-head">
+            <span>HTML</span>
+            <div>
+              <button onclick="copyCode('install-vanilla')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="install-vanilla">&lt;script src="https://lib.lyraxis.my.id/notification/script.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <h3>npm</h3>
+        <p>Install the package via npm for module bundlers or React apps.</p>
+
+        <div class="code-box" data-code-id="install-npm">
+          <div class="code-head">
+            <span>Terminal</span>
+            <div>
+              <button onclick="copyCode('install-npm')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="install-npm">npm install lyraxis-notification</code></pre>
+        </div>
+      </section>
+
+      <section id="vanilla">
+        <div class="section-label">VANILLA JAVASCRIPT</div>
+        <h2>Vanilla Setup</h2>
+        <p>In Vanilla JavaScript environments, Lyraxis auto-injects its styling and exposes the global <code>lyn</code> object.</p>
+
+        <div class="code-box" data-code-id="vanilla-setup">
+          <div class="code-head">
+            <span>HTML</span>
+            <div>
+              <button onclick="runCode('vanilla-setup')">Run</button>
+              <button onclick="copyCode('vanilla-setup')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="vanilla-setup">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Lyraxis Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;button onclick="showNotification()"&gt;Show Notification&lt;/button&gt;
+
+  &lt;script src="https://lib.lyraxis.my.id/notification/script.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    lyn.soundNotification("allow");
+
+    function showNotification() {
+      lyn.toast({
+        Title: "Hello!",
+        Mess: "Lyraxis loaded successfully.",
+        Status: "success"
+      });
+    }
+  &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+      </section>
+
+      <section id="vanilla-usage">
+        <h2>Vanilla Usage</h2>
+        <p>All core notification methods are accessible directly through the <code>lyn</code> object.</p>
+
+        <div class="quick-grid">
+          <div class="quick-card">
+            <strong>lyn.log()</strong>
+            <span>Simple bottom notification</span>
+          </div>
+          <div class="quick-card">
+            <strong>lyn.info()</strong>
+            <span>Information modal dialog</span>
+          </div>
+          <div class="quick-card">
+            <strong>lyn.confirm()</strong>
+            <span>Confirmation modal dialog</span>
+          </div>
+          <div class="quick-card">
+            <strong>lyn.prompt()</strong>
+            <span>Promise-based input modal</span>
+          </div>
+          <div class="quick-card">
+            <strong>lyn.toast()</strong>
+            <span>Stackable toast notification</span>
+          </div>
+          <div class="quick-card">
+            <strong>lyn.dynamicIsland()</strong>
+            <span>Animated Dynamic Island</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="react">
+        <div class="section-label">REACT</div>
+        <h2>React Setup</h2>
+        <p>Import and call <code>lyn</code> methods inside your React event handlers.</p>
+
+        <div class="code-box" data-code-id="react-setup">
+          <div class="code-head">
+            <span>JSX</span>
+            <div>
+              <button onclick="copyCode('react-setup')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="react-setup">import lyn from "lyraxis-notification";
+
+function App() {
+  function showNotification() {
+    lyn.toast({
+      Title: "Success",
+      Mess: "Hello from React!",
+      Status: "success"
+    });
+  }
+
+  return (
+    &lt;button onClick={showNotification}&gt;
+      Show Notification
+    &lt;/button&gt;
+  );
+}
+
+export default App;</code></pre>
+        </div>
+      </section>
+
+      <section id="react-usage">
+        <h2>React Usage</h2>
+        <p>Attach methods directly to standard React synthetic events like <code>onClick</code>.</p>
+
+        <div class="code-box" data-code-id="react-toast">
+          <div class="code-head">
+            <span>React</span>
+            <div>
+              <button onclick="copyCode('react-toast')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="react-toast">function App() {
+  const notify = () =&gt; {
+    lyn.toast({
+      Title: "Data Saved",
+      Mess: "Your changes have been saved successfully.",
+      Status: "success"
+    });
+  };
+
+  return (
+    &lt;button onClick={notify}&gt;
+      Save Changes
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </div>
+      </section>
+
+      <section id="api">
+        <div class="section-label">API REFERENCE</div>
+        <h2>API Overview</h2>
+        <p>Comprehensive list of methods available on the <code>lyn</code> instance. Most parameters are optional and fall back to default values automatically if omitted.</p>
+
+        <div class="api-table">
+          <div class="api-row api-header">
+            <span>Method</span>
+            <span>Description</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.log()</code>
+            <span>Displays a subtle status bar at the bottom of the screen.</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.info()</code>
+            <span>Displays an informational modal with title and subtitle.</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.confirm()</code>
+            <span>Displays a confirmation modal with callback options.</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.prompt()</code>
+            <span>Displays an input modal that resolves a JavaScript Promise.</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.toast()</code>
+            <span>Displays a toast notification on the top-right screen.</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.dynamicIsland()</code>
+            <span>Displays an expandable Dynamic Island banner.</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.setLang()</code>
+            <span>Switches the internal system language ("en" or "id").</span>
+          </div>
+          <div class="api-row">
+            <code>lyn.soundNotification()</code>
+            <span>Enables or disables sound effects for notifications.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="log">
+        <h2>lyn.log()</h2>
+        <p>Displays lightweight log bar notifications at the bottom of the viewport.</p>
+        <div class="signature">lyn.log(options)</div>
+
+        <h3>Options</h3>
+        <div class="option-list">
+          <div>
+            <div><code>Mess</code> <span class="badge-opt">Optional</span></div>
+            <span>The message text content. Defaults to an empty log line.</span>
+          </div>
+          <div>
+            <div><code>Status</code> <span class="badge-opt">Optional</span></div>
+            <span>Notification state ("default" or "error"). Defaults to <code>"default"</code>.</span>
+          </div>
+        </div>
+
+        <div class="code-box" data-code-id="log-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('log-example')">Run</button>
+              <button onclick="copyCode('log-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="log-example">lyn.log({
+  Mess: "Request sent successfully, please wait."
+});
+
+lyn.log({
+  Status: "error",
+  Mess: "Failed to connect to server."
+});</code></pre>
+        </div>
+      </section>
+
+      <section id="info">
+        <h2>lyn.info()</h2>
+        <p>Opens a structured modal dialog containing subtitle, title, and detailed message text.</p>
+        <div class="signature">lyn.info(options)</div>
+
+        <h3>Options</h3>
+        <div class="option-list">
+          <div>
+            <div><code>Subtitle</code> <span class="badge-opt">Optional</span></div>
+            <span>Header text shown above the main title. Defaults to the system localized subtitle.</span>
+          </div>
+          <div>
+            <div><code>Title</code> <span class="badge-opt">Optional</span></div>
+            <span>Main title text of the modal. Defaults to the system localized title.</span>
+          </div>
+          <div>
+            <div><code>Mess</code> <span class="badge-opt">Optional</span></div>
+            <span>Main message body (supports newlines).</span>
+          </div>
+        </div>
+
+        <div class="code-box" data-code-id="info-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('info-example')">Run</button>
+              <button onclick="copyCode('info-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="info-example">lyn.info({
+  Subtitle: "Lyraxis Demo",
+  Title: "Information",
+  Mess: "This is an informational dialog from lyn.info.\nSecond line text is also supported."
+});</code></pre>
+        </div>
+      </section>
+
+      <section id="confirm">
+        <h2>lyn.confirm()</h2>
+        <p>Displays an interactive confirmation dialog with action callbacks.</p>
+        <div class="signature">lyn.confirm(options)</div>
+
+        <h3>Options</h3>
+        <div class="option-list">
+          <div>
+            <div><code>Mess</code> <span class="badge-opt">Optional</span></div>
+            <span>Confirmation prompt message. Defaults to localized default confirm text.</span>
+          </div>
+          <div>
+            <div><code>Event</code> <span class="badge-opt">Optional</span></div>
+            <span>Callback function or redirect URL executed when "Continue" is clicked.</span>
+          </div>
+        </div>
+
+        <div class="code-box" data-code-id="confirm-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('confirm-example')">Run</button>
+              <button onclick="copyCode('confirm-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="confirm-example">lyn.confirm({
+  Mess: "Are you sure you want to proceed?",
+  Event: function() {
+    lyn.log({
+      Status: "success",
+      Mess: "You pressed Continue."
+    });
+  }
+});</code></pre>
+        </div>
+      </section>
+
+      <section id="prompt">
+        <h2>lyn.prompt()</h2>
+        <p>Opens an input modal dialog. Returns a Promise that resolves with user input or rejects if cancelled.</p>
+        <div class="signature">await lyn.prompt(options)</div>
+
+        <h3>Options</h3>
+        <div class="option-list">
+          <div>
+            <div><code>Mess</code> <span class="badge-opt">Optional</span></div>
+            <span>Input label prompt text. Defaults to localized prompt title.</span>
+          </div>
+          <div>
+            <div><code>Type</code> <span class="badge-opt">Optional</span></div>
+            <span>HTML input field type. Defaults to <code>"text"</code>.</span>
+          </div>
+        </div>
+
+        <h3>Input Types</h3>
+        <div class="tag-list">
+          <code>text</code>
+          <code>number</code>
+          <code>num</code>
+          <code>email</code>
+          <code>url</code>
+          <code>date</code>
+          <code>time</code>
+          <code>tel</code>
+          <code>range</code>
+          <code>password</code>
+        </div>
+
+        <div class="code-box" data-code-id="prompt-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('prompt-example')">Run</button>
+              <button onclick="copyCode('prompt-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="prompt-example">async function askNumber() {
+  try {
+    const number = await lyn.prompt({
+      Mess: "Enter your phone number:",
+      Type: "num"
+    });
+
+    lyn.log({
+      Status: "success",
+      Mess: "You entered: " + number
+    });
+  } catch (err) {
+    lyn.log({
+      Status: "error",
+      Mess: "User cancelled the prompt."
+    });
+  }
+}
+
+askNumber();</code></pre>
+        </div>
+      </section>
+
+      <section id="toast">
+        <h2>lyn.toast()</h2>
+        <p>Displays stackable toast notifications at the top-right corner with queued auto-dismissal.</p>
+        <div class="signature">lyn.toast(options)</div>
+
+        <h3>Options</h3>
+        <div class="option-list">
+          <div>
+            <div><code>Title</code> <span class="badge-opt">Optional</span></div>
+            <span>Toast header title. Defaults to status label or localized text.</span>
+          </div>
+          <div>
+            <div><code>Mess</code> <span class="badge-opt">Optional</span></div>
+            <span>Toast body text content.</span>
+          </div>
+          <div>
+            <div><code>Status</code> <span class="badge-opt">Optional</span></div>
+            <span>Toast status theme. Defaults to <code>"default"</code>.</span>
+          </div>
+          <div>
+            <div><code>Permanent</code> <span class="badge-opt">Optional</span></div>
+            <span>If true, the toast will stay until closed manually. Defaults to <code>false</code>.</span>
+          </div>
+        </div>
+
+        <h3>Status Values</h3>
+        <div class="tag-list">
+          <code>default</code>
+          <code>success</code>
+          <code>ok</code>
+          <code>error</code>
+          <code>err</code>
+          <code>failed</code>
+        </div>
+
+        <div class="code-box" data-code-id="toast-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('toast-example')">Run</button>
+              <button onclick="copyCode('toast-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="toast-example">lyn.toast({
+  Title: "Information",
+  Mess: "This is a default toast.",
+  Status: "default"
+});
+
+lyn.toast({
+  Title: "Success",
+  Mess: "Data saved successfully.",
+  Status: "success"
+});
+
+lyn.toast({
+  Title: "Error",
+  Mess: "Server error occurred.",
+  Status: "error"
+});
+
+lyn.toast({
+  Title: "Permanent",
+  Mess: "This toast will not auto-dismiss.",
+  Status: "default",
+  Permanent: true
+});</code></pre>
+        </div>
+      </section>
+
+      <section id="dynamic">
+        <h2>lyn.dynamicIsland()</h2>
+        <p>Displays an interactive Dynamic Island banner with smooth expand and collapse animations.</p>
+        <div class="signature">lyn.dynamicIsland(options)</div>
+
+        <h3>Options</h3>
+        <div class="option-list">
+          <div>
+            <div><code>Status</code> <span class="badge-opt">Optional</span></div>
+            <span>Defines color accent and status state. Defaults to <code>"default"</code>.</span>
+          </div>
+          <div>
+            <div><code>Mess</code> <span class="badge-opt">Optional</span></div>
+            <span>Primary message content.</span>
+          </div>
+          <div>
+            <div><code>Label</code> <span class="badge-opt">Optional</span></div>
+            <span>Built-in icon and preset type. Defaults to <code>"info"</code>.</span>
+          </div>
+          <div>
+            <div><code>Duration</code> <span class="badge-opt">Optional</span></div>
+            <span>Display duration in milliseconds.</span>
+          </div>
+          <div>
+            <div><code>CustomIcon</code> <span class="badge-opt">Optional</span></div>
+            <span>Custom SVG or HTML icon string. Requires <code>Label: "custom"</code>.</span>
+          </div>
+          <div>
+            <div><code>CustomColor</code> <span class="badge-opt">Optional</span></div>
+            <span>Custom icon accent color. Requires <code>Label: "custom"</code>.</span>
+          </div>
+          <div>
+            <div><code>CustomAnimation</code> <span class="badge-opt">Optional</span></div>
+            <span>Custom CSS animation rule. Requires <code>Label: "custom"</code>.</span>
+          </div>
+        </div>
+
+        <div class="code-box" data-code-id="dynamic-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('dynamic-example')">Run</button>
+              <button onclick="copyCode('dynamic-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="dynamic-example">lyn.dynamicIsland({
+  Status: "success",
+  Mess: "File downloaded successfully",
+  Label: "download",
+  Duration: 3000
+});</code></pre>
+        </div>
+      </section>
+
+      <section id="dynamic-status">
+        <h2>Dynamic Island Statuses</h2>
+        <p>Supported status themes for customizing Dynamic Island visuals.</p>
+
+        <div class="status-grid">
+          <div class="status-card default">
+            <strong>default</strong>
+            <span>Default theme</span>
+          </div>
+          <div class="status-card active">
+            <strong>active</strong>
+            <span>Active theme</span>
+          </div>
+          <div class="status-card success">
+            <strong>success</strong>
+            <span>Success theme</span>
+          </div>
+          <div class="status-card warning">
+            <strong>warning</strong>
+            <span>Warning theme</span>
+          </div>
+          <div class="status-card failed">
+            <strong>failed</strong>
+            <span>Error theme</span>
+          </div>
+          <div class="status-card waiting">
+            <strong>waiting</strong>
+            <span>Pending state</span>
+          </div>
+        </div>
+
+        <div class="code-box" data-code-id="dynamic-status-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('dynamic-status-example')">Run</button>
+              <button onclick="copyCode('dynamic-status-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="dynamic-status-example">const statuses = [
+  { Status: "default", Label: "info", Mess: "Default status" },
+  { Status: "active", Label: "info", Mess: "Active status" },
+  { Status: "success", Label: "success", Mess: "Success status" },
+  { Status: "warning", Label: "warning", Mess: "Warning status" },
+  { Status: "failed", Label: "failed", Mess: "Failed status" },
+  { Status: "waiting", Label: "wait", Mess: "Waiting status" }
+];
+
+statuses.forEach(item => lyn.dynamicIsland(item));</code></pre>
+        </div>
+      </section>
+
+      <section id="dynamic-icons">
+        <h2>Dynamic Island Icons</h2>
+        <p>Built-in icon choices mapped to the <code>Label</code> parameter.</p>
+
+        <div class="icon-list">
+          <code>home</code>
+          <code>notification</code>
+          <code>music</code>
+          <code>info</code>
+          <code>download</code>
+          <code>upload</code>
+          <code>settings</code>
+          <code>success</code>
+          <code>failed</code>
+          <code>warning</code>
+          <code>wait</code>
+        </div>
+
+        <div class="code-box" data-code-id="dynamic-icons-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('dynamic-icons-example')">Run</button>
+              <button onclick="copyCode('dynamic-icons-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="dynamic-icons-example">const icons = [
+  "home", "notification", "music", "info",
+  "download", "upload", "settings", "success",
+  "failed", "warning", "wait"
+];
+
+icons.forEach(icon => {
+  lyn.dynamicIsland({
+    Status: "default",
+    Label: icon,
+    Mess: "Icon: " + icon
+  });
+});</code></pre>
+        </div>
+      </section>
+
+      <section id="dynamic-custom">
+        <h2>Custom Dynamic Island</h2>
+        <p>Set <code>Label: "custom"</code> to insert custom SVG graphics, colors, and keyframe animations.</p>
+
+        <div class="code-box" data-code-id="dynamic-custom-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('dynamic-custom-example')">Run</button>
+              <button onclick="copyCode('dynamic-custom-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="dynamic-custom-example">lyn.dynamicIsland({
+  Label: "custom",
+  Mess: "Custom Dynamic Island!",
+  CustomIcon: `
+    &lt;svg viewBox="0 0 24 24"&gt;
+      &lt;path d="M12 2 14.5 9.5 22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/&gt;
+    &lt;/svg&gt;
+  `,
+  CustomColor: "#a855f7",
+  CustomAnimation: "lyCustomPulse 1s ease-in-out infinite"
+});</code></pre>
+        </div>
+      </section>
+
+      <section id="dynamic-animation">
+        <h2>Custom Animation</h2>
+        <p>Pass custom CSS animation property values and declare keyframe styles in your stylesheet.</p>
+
+        <div class="code-box" data-code-id="dynamic-animation-example">
+          <div class="code-head">
+            <span>JavaScript + CSS</span>
+            <div>
+              <button onclick="runCode('dynamic-animation-example')">Run</button>
+              <button onclick="copyCode('dynamic-animation-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="dynamic-animation-example">lyn.dynamicIsland({
+  Label: "custom",
+  Mess: "Custom pulse animation!",
+  CustomIcon: '&lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/&gt;&lt;/svg&gt;',
+  CustomColor: "#d0e505",
+  CustomAnimation: "lyCustomPulse 1s ease-in-out infinite"
+});
+
+/*
+CSS Keyframes:
+@keyframes lyCustomPulse {
+  0% { transform: scale(1) rotate(0); }
+  50% { transform: scale(1.25) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+*/</code></pre>
+        </div>
+      </section>
+
+      <section id="language">
+        <h2>lyn.setLang()</h2>
+        <p>Switch between supported localization presets (English and Indonesian).</p>
+        <div class="signature">lyn.setLang(language)</div>
+
+        <div class="tag-list">
+          <code>en</code>
+          <code>id</code>
+        </div>
+
+        <div class="code-box" data-code-id="language-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('language-example')">Run</button>
+              <button onclick="copyCode('language-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="language-example">lyn.setLang("en");
+
+lyn.info({
+  Mess: "Language is now set to English."
+});
+
+lyn.setLang("id");
+
+lyn.info({
+  Mess: "Bahasa sekarang menggunakan Indonesia."
+});</code></pre>
+        </div>
+
+        <h3>Localization Keys</h3>
+        <div class="translation-grid">
+          <div><code>title_info</code><span>Info modal title</span></div>
+          <div><code>subtitle_info</code><span>Info modal subtitle</span></div>
+          <div><code>title_confirm</code><span>Confirm modal title</span></div>
+          <div><code>subtitle_confirm</code><span>Confirm modal subtitle</span></div>
+          <div><code>default_confirm</code><span>Default confirm message</span></div>
+          <div><code>cancel</code><span>Cancel button text</span></div>
+          <div><code>continue</code><span>Continue button text</span></div>
+          <div><code>ok</code><span>OK button text</span></div>
+          <div><code>prompt_title</code><span>Prompt title</span></div>
+          <div><code>prompt_subtitle</code><span>Prompt subtitle</span></div>
+          <div><code>send</code><span>Send button text</span></div>
+          <div><code>bye</code><span>Completion message</span></div>
+          <div><code>error</code><span>Error message</span></div>
+          <div><code>default_titleqr</code><span>Default QR title</span></div>
+          <div><code>any_info</code><span>Custom button info</span></div>
+        </div>
+      </section>
+
+      <section id="sound">
+        <h2>lyn.soundNotification()</h2>
+        <p>Controls global sound effects when triggering notifications.</p>
+        <div class="signature">lyn.soundNotification(value)</div>
+
+        <h3>Supported Values</h3>
+        <div class="tag-list">
+          <code>allow</code>
+          <code>on</code>
+          <code>enable</code>
+          <code>off</code>
+          <code>false</code>
+          <code>true</code>
+        </div>
+
+        <div class="code-box" data-code-id="sound-example">
+          <div class="code-head">
+            <span>JavaScript</span>
+            <div>
+              <button onclick="runCode('sound-example')">Run</button>
+              <button onclick="copyCode('sound-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="sound-example">lyn.soundNotification("allow");
+
+lyn.toast({
+  Title: "Sound ON",
+  Mess: "Notification sounds enabled.",
+  Status: "success"
+});
+
+lyn.soundNotification("off");
+
+lyn.toast({
+  Title: "Sound OFF",
+  Mess: "Notification sounds disabled."
+});</code></pre>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-label">COMPLETE EXAMPLE</div>
+        <h2>Example Project</h2>
+        <p>A full integration example demonstrating multiple Lyraxis notification types together.</p>
+
+        <div class="code-box" data-code-id="complete-example">
+          <div class="code-head">
+            <span>HTML</span>
+            <div>
+              <button onclick="runCode('complete-example')">Run</button>
+              <button onclick="copyCode('complete-example')">Copy</button>
+            </div>
+          </div>
+          <pre><code id="complete-example">&lt;button onclick="showToast()"&gt;Toast&lt;/button&gt;
+&lt;button onclick="showConfirm()"&gt;Confirm&lt;/button&gt;
+&lt;button onclick="showDynamic()"&gt;Dynamic Island&lt;/button&gt;
+
+&lt;script src="https://lib.lyraxis.my.id/notification/script.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  lyn.soundNotification("allow");
+
+  function showToast() {
+    lyn.toast({
+      Title: "Lyraxis",
+      Mess: "Hello from Lyraxis!",
+      Status: "success"
+    });
+  }
+
+  function showConfirm() {
+    lyn.confirm({
+      Mess: "Are you sure you want to proceed?",
+      Event: function() {
+        lyn.log({
+          Status: "success",
+          Mess: "Proceeded successfully."
+        });
+      }
+    });
+  }
+
+  function showDynamic() {
+    lyn.dynamicIsland({
+      Status: "success",
+      Label: "download",
+      Mess: "Download finished!",
+      Duration: 3000
+    });
+  }
+&lt;/script&gt;</code></pre>
+        </div>
+      </section>
+
+      <section class="footer-note">
+        <div class="footer-brand">
+          <img src="assets/main.png" alt="Lyraxis Logo">
+          <strong>Lyraxis</strong>
+        </div>
+        <p>Lightweight notification system for modern web projects.</p>
+        <a href="https://www.lyraxis.my.id" target="_blank" rel="noopener noreferrer">www.lyraxis.my.id</a>
+        <div class="copyright">© Lyraxis 2026.</div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Local Script Path for index.html -->
+  <script src="./script.js"></script>
+
+  <script>
+    const CDN_SCRIPT = "https://lib.lyraxis.my.id/notification/script.js";
+
+    function getCode(id) {
+      const element = document.getElementById(id);
+      return element ? element.textContent : "";
+    }
+
+    async function copyCode(id) {
+      const code = getCode(id);
+      if (!code) return;
+
+      try {
+        await navigator.clipboard.writeText(code);
+        if (typeof lyn !== "undefined") {
+          lyn.toast({
+            Title: "Copied",
+            Mess: "Code copied to clipboard.",
+            Status: "success"
+          });
+        }
+      } catch (error) {
+        const textarea = document.createElement("textarea");
+        textarea.value = code;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        textarea.remove();
+
+        if (typeof lyn !== "undefined") {
+          lyn.toast({
+            Title: "Copied",
+            Mess: "Code copied to clipboard.",
+            Status: "success"
+          });
+        }
+      }
+    }
+
+    function runCode(id) {
+      const code = getCode(id);
+      if (!code) return;
+
+      try {
+        const cleanCode = code
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">")
+          .replace(/&amp;/g, "&");
+
+        // Single JS snippet executed directly on page
+        if (!cleanCode.includes("<!DOCTYPE") && !cleanCode.includes("<html") && !cleanCode.includes("<button")) {
+          if (typeof lyn !== "undefined") {
+            new Function(cleanCode)();
+          } else {
+            alert("Lyraxis script is not ready yet!");
+          }
+          return;
+        }
+
+        // Full HTML blocks opened safely in a new tab using CDN
+        let fullHtml = cleanCode;
+        if (!cleanCode.includes("<html")) {
+          fullHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyraxis Test Run</title>
+  <style>
+    body {
+      background: #0c0d0f;
+      color: #f2f3f5;
+      font-family: sans-serif;
+      padding: 40px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    button {
+      padding: 10px 18px;
+      background: #d0e505;
+      color: #111;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  ${cleanCode}
+  <script src="${CDN_SCRIPT}"><\/script>
+</body>
+</html>`;
+        }
+
+        const blob = new Blob([fullHtml], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank", "noopener,noreferrer");
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+      } catch (error) {
+        if (typeof lyn !== "undefined") {
+          lyn.toast({
+            Title: "Run Error",
+            Mess: error.message || "An error occurred.",
+            Status: "error",
+            Permanent: true
+          });
+        } else {
+          console.error(error);
+        }
+      }
+    }
+  </script>
 </body>
 </html>
